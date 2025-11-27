@@ -148,19 +148,22 @@
             gap: 30px;
         }
 
-        .service-card {
-            background: #fff;
-            padding: 40px;
-            border: 1px solid #eee;
-            text-align: center;
-            transition: 0.3s;
-        }
+       /* NEW SERVICE CARD STYLE */
+.service-card {
+    background: #fff;
+    padding: 40px 30px;
+    border: 1px solid #eee;
+    text-align: center;
+    transition: 0.3s;
+    height: 100%; /* Important for Slider */
+    border-radius: 10px;
+}
 
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            border-bottom: 3px solid var(--accent-gold);
-        }
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-bottom: 3px solid #c5a059;
+}
 
         .service-icon {
             font-size: 2rem;
@@ -382,30 +385,60 @@
         </div>
     </section>
 
-    <section id="services" class="section-padding">
-        <div class="section-header">
-            <h2>Our Premium Services</h2>
-            <div class="divider"></div>
+    <section id="services" class="section-padding" style="background: #fdfdfd;">
+    <div class="section-header">
+        <h2>Our Premium Services</h2>
+        <div class="divider"></div>
+        <p style="color: #888; margin-top: 10px;">Swipe to explore our expertise</p>
+    </div>
+
+    <div class="swiper servicesSwiper" style="padding-bottom: 50px;">
+        <div class="swiper-wrapper">
+            
+            <div class="swiper-slide">
+                <div class="service-card">
+                    <div class="service-icon">✈️</div>
+                    <h3>Visa Consultancy</h3>
+                    <p>Comprehensive assistance with work permits, student visas, and permanent residency.</p>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="service-card">
+                    <div class="service-icon">💼</div>
+                    <h3>Job Placement</h3>
+                    <p>Connecting skilled professionals with top-tier international employers.</p>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>Student Admissions</h3>
+                    <p>Guidance for selecting top universities in Europe and scholarships.</p>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="service-card">
+                    <div class="service-icon">📄</div>
+                    <h3>Documentation</h3>
+                    <p>Professional resume writing, cover letter optimization, and attestation.</p>
+                </div>
+            </div>
+
+             <div class="swiper-slide">
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Accommodation</h3>
+                    <p>We assist in finding safe housing options before you land.</p>
+                </div>
+            </div>
+
         </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">✈️</div>
-                <h3>Visa Consultancy</h3>
-                <p>Comprehensive assistance with work permits, student visas, and permanent residency applications for European nations.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">💼</div>
-                <h3>Job Placement</h3>
-                <p>Connecting skilled professionals with top-tier international employers in Engineering, Healthcare, and IT.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">📄</div>
-                <h3>Documentation</h3>
-                <p>Professional resume writing, cover letter optimization, and document attestation services.</p>
-            </div>
-        </div>
-    </section>
-<section id="testimonials" class="section-padding" style="background-color: #0f2b46; color: white;">
+        <div class="swiper-pagination"></div>
+    </div>
+</section><section id="testimonials" class="section-padding" style="background-color: #0f2b46; color: white;">
     
     <div class="section-header">
         <h2 style="color: white;">Client Success Stories</h2>
@@ -598,6 +631,72 @@
     }
 </style>
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    // 1. SERVICES SLIDER (New)
+    var swiperServices = new Swiper(".servicesSwiper", {
+        slidesPerView: 1, 
+        spaceBetween: 25,
+        loop: true,
+        autoplay: { delay: 2500, disableOnInteraction: false },
+        pagination: { el: ".swiper-pagination", clickable: true },
+        breakpoints: {
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 }, 
+            1024: { slidesPerView: 3 }, 
+        },
+    });
+
+    // 2. TESTIMONIALS SLIDER (Existing)
+    var swiperTestimonials = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: { delay: 3500, disableOnInteraction: false },
+        pagination: { el: ".swiper-pagination", clickable: true },
+        breakpoints: {
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+        },
+    });
+
+    // 3. MOBILE MENU TOGGLE
+    function toggleMenu() {
+        const menu = document.querySelector(".nav-links");
+        menu.classList.toggle("active");
+    }
+
+    // 4. TYPEWRITER EFFECT
+    const textElement = document.querySelector(".typewriter");
+    if(textElement) {
+        const words = ["Europe Careers", "Germany Jobs", "Student Visas"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                textElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                setTimeout(type, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 100 : 200);
+            }
+        }
+        textElement.style.color = "#c5a059"; 
+        type();
+    }
+</script>
 <script>
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 1, // Show 1 card on mobile
