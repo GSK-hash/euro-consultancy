@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Euro International Overseas Consultancy</title>
-	<link rel="icon" href="favicon.png.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
+	
+	
         /* --- RESET & VARIABLES --- */
         :root {
             --primary-blue: #0f2b46; /* Deep Euro Blue */
@@ -272,6 +273,7 @@
     background: #c5a059 !important; /* Gold Active Dot */
     opacity: 1;
 }
+
 /* --- SOCIAL MEDIA ICONS --- */
 .social-container {
     margin-bottom: 20px; /* Space between icons and copyright text */
@@ -291,6 +293,37 @@
     fill: #c5a059; /* Hover Color (Gold) */
     transform: translateY(-3px); /* Moves up slightly */
 }
+
+/* --- STRONG PULSE ANIMATION --- */
+.btn-cta {
+    /* Button Base Style */
+    background: #0f2b46;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+    /* Animation Settings */
+    box-shadow: 0 0 0 0 rgba(15, 43, 70, 0.7);
+    animation: heartBeat 1.5s infinite;
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(1); /* Normal Size */
+        box-shadow: 0 0 0 0 rgba(15, 43, 70, 0.7);
+    }
+    50% {
+        transform: scale(1.05); /* Grow 5% Bigger */
+        box-shadow: 0 0 0 10px rgba(15, 43, 70, 0); /* Ripple Effect */
+    }
+    100% {
+        transform: scale(1); /* Back to Normal */
+        box-shadow: 0 0 0 0 rgba(15, 43, 70, 0);
+    }
+}
+
     </style>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
@@ -298,6 +331,7 @@
 
     <nav>
         <div class="logo">Euro International<br><span style="font-size:0.7em; font-weight:300;">Overseas Consultancy</span></div>
+		
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
             <li><a href="#services">Services</a></li>
@@ -308,7 +342,7 @@
     </nav>
 
     <section class="hero">
-        <h1>Your Gateway to Global Careers</h1>
+        <h1>Your Gateway to <span class="typewriter"></span></h1>
         <p>Expert guidance for overseas job placements, visa processing, and international relocation. Specializing in European opportunities.</p>
         <button class="btn-hero" onclick="window.location.href='#contact'">Start Your Journey</button>
     </section>
@@ -476,7 +510,8 @@
 
     </div>
 </section>
-	
+
+
  <footer>
     
     <div class="social-container">
@@ -561,6 +596,42 @@
             },
         },
     });
+</script>
+
+<script>
+    const textElement = document.querySelector(".typewriter");
+    const words = ["Europe Careers", "Germany Jobs", "Student Visas", "UK Work Permit"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+        const currentWord = words[wordIndex];
+        if (isDeleting) {
+            textElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            textElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        if (!isDeleting && charIndex === currentWord.length) {
+            isDeleting = true;
+            setTimeout(type, 2000); // Wait before deleting
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            setTimeout(type, 500); // Wait before typing next word
+        } else {
+            setTimeout(type, isDeleting ? 100 : 200);
+        }
+    }
+    
+    // Add gold color to the typing text
+    textElement.style.color = "#c5a059"; 
+    
+    // Start typing
+    type();
 </script>
 
 </body>
