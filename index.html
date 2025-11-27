@@ -324,6 +324,26 @@
     }
 }
 
+/* --- STRONG WHATSAPP PULSE --- */
+.whatsapp-btn {
+    animation: whatsappHeartBeat 2s infinite;
+}
+
+@keyframes whatsappHeartBeat {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); /* Green Shadow Start */
+    }
+    50% {
+        transform: scale(1.1); /* Grow 10% Bigger */
+        box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); /* Green Ring Expands */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
     </style>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
